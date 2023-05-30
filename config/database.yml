@@ -13,12 +13,12 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['PGDATABASE'] %>
-  username: <%= ENV['PGUSER'] %>
-  password: <%= ENV['PGPASSWORD'] %>
-  host: <%= ENV['PGHOST'] %>
-  port: <%= ENV['PGPORT'] %>
   url: <%= ENV["DATABASE_URL"] %>
+  # database: <%= ENV['PGDATABASE'] %>
+  # username: <%= ENV['PGUSER'] %>
+  # password: <%= ENV['PGPASSWORD'] %>
+  # host: <%= ENV['PGHOST'] %>
+  # port: <%= ENV['PGPORT'] %>
 
 # # PostgreSQL. Versions 9.3 and up are supported.
 # #
