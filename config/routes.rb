@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  root to: redirect('/healthcheck', status: 302)
+    
+  namespace :api do
+    namespace :v1 do
+        resources :patients
+        resources :immunotherapies
+      end  
+  end
+
   get "/healthcheck", to: proc { [200, {}, ["success"]] }
 end
