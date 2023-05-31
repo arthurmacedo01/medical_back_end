@@ -1,6 +1,7 @@
 class Api::V1::PatientsController < ApplicationController
   before_action :set_patient, only: %i[ show update destroy ]
-
+  skip_before_action :verify_authenticity_token
+  
   # GET /patients
   def index
     @patients = Patient.all
@@ -15,12 +16,18 @@ class Api::V1::PatientsController < ApplicationController
 
   # POST /patients
   def create
+    puts "criando"
+
     @patient = Patient.new(patient_params)
+    puts "feito @patient = Patient.new(patient_params)"
+
+    @patient.save!
+    puts "feito @patient.save"
 
     if @patient.save
-      render json: @patient, status: :created, location: @patient
+      render json: @patient, status: 200
     else
-      render json: @patient.errors, status: :unprocessable_entity
+      render json: @patient, status: 500
     end
   end
 
