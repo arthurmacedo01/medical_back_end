@@ -21,9 +21,6 @@ class Api::V1::PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
     puts "feito @patient = Patient.new(patient_params)"
 
-    @patient.save!
-    puts "feito @patient.save"
-
     if @patient.save
       render json: @patient, status: 200
     else
@@ -36,13 +33,17 @@ class Api::V1::PatientsController < ApplicationController
     if @patient.update(patient_params)
       render json: @patient
     else
-      render json: @patient.errors, status: :unprocessable_entity
+      render json: @patient, status: 500
     end
   end
 
   # DELETE /patients/1
-  def destroy
-    @patient.destroy
+  def destroy    
+    if @patient.destroy
+      render json: @patient, status: 200
+    else
+      render json: @patient, status: 500
+    end
   end
 
   private
