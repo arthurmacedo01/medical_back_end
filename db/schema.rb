@@ -10,9 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_01_225502) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_222634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "patch_forms", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.string "clinic"
+    t.date "application"
+    t.date "first_measurement"
+    t.date "second_measurement"
+    t.string "city"
+    t.date "signature_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_patch_forms_on_patient_id"
+  end
+
+  create_table "patch_measurements", force: :cascade do |t|
+    t.string "first"
+    t.string "second"
+    t.string "result"
+    t.bigint "patch_sensitizer_info_id", null: false
+    t.bigint "patch_form_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patch_form_id"], name: "index_patch_measurements_on_patch_form_id"
+    t.index ["patch_sensitizer_info_id"], name: "index_patch_measurements_on_patch_sensitizer_info_id"
+  end
+
+  create_table "patch_sensitizer_infos", force: :cascade do |t|
+    t.bigint "patch_test_info_id", null: false
+    t.string "label"
+    t.string "name"
+    t.string "option_name"
+    t.text "description"
+    t.text "first_text"
+    t.text "second_text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patch_test_info_id"], name: "index_patch_sensitizer_infos_on_patch_test_info_id"
+  end
+
+  create_table "patch_test_infos", force: :cascade do |t|
+    t.string "identifier"
+    t.string "title"
+    t.boolean "initial_show"
+    t.text "description"
+    t.text "application"
+    t.text "citation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "patients", force: :cascade do |t|
     t.string "name"
@@ -28,4 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_01_225502) do
     t.text "obs"
   end
 
+  add_foreign_key "patch_forms", "patients"
+  add_foreign_key "patch_measurements", "patch_forms"
+  add_foreign_key "patch_measurements", "patch_sensitizer_infos"
+  add_foreign_key "patch_sensitizer_infos", "patch_test_infos"
 end
