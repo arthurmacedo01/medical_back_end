@@ -1,7 +1,7 @@
 class Api::V1::PatientsController < ApplicationController
-  before_action :set_patient, only: %i[ show update destroy ]
+  before_action :set_patient, only: %i[show update destroy]
   skip_before_action :verify_authenticity_token
-  
+
   # GET /patients
   def index
     @patients = Patient.all
@@ -16,10 +16,7 @@ class Api::V1::PatientsController < ApplicationController
 
   # POST /patients
   def create
-    puts "criando"
-
     @patient = Patient.new(patient_params)
-    puts "feito @patient = Patient.new(patient_params)"
 
     if @patient.save
       render json: @patient, status: 200
@@ -38,7 +35,7 @@ class Api::V1::PatientsController < ApplicationController
   end
 
   # DELETE /patients/1
-  def destroy    
+  def destroy
     if @patient.destroy
       render json: @patient, status: 200
     else
@@ -47,13 +44,24 @@ class Api::V1::PatientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_patient
-      @patient = Patient.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def patient_params
-      params.require(:patient).permit(:name, :birthday, :cpf, :gender, :contact, :responsable_name, :responsable_degree, :origin, :obs)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_patient
+    @patient = Patient.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def patient_params
+    params.require(:patient).permit(
+      :name,
+      :birthday,
+      :cpf,
+      :gender,
+      :contact,
+      :responsable_name,
+      :responsable_degree,
+      :origin,
+      :obs,
+    )
+  end
 end
