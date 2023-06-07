@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_224412) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_07_182226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "immunotherapies", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.string "origin"
+    t.string "ige_total"
+    t.string "ige_specific"
+    t.string "eosinofilos_perc"
+    t.string "eosinofilos_mm"
+    t.string "prick_summary"
+    t.string "patch_summary"
+    t.text "primary_diagnosis"
+    t.text "secundary_diagnosis"
+    t.text "immunotheray_composition"
+    t.text "dilution_volume"
+    t.integer "sublingual_drops"
+    t.string "city"
+    t.date "signature_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_immunotherapies_on_patient_id"
+  end
 
   create_table "patch_forms", force: :cascade do |t|
     t.bigint "patient_id", null: false
@@ -78,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_224412) do
     t.text "obs"
   end
 
+  add_foreign_key "immunotherapies", "patients"
   add_foreign_key "patch_forms", "patients"
   add_foreign_key "patch_measurements", "patch_forms"
   add_foreign_key "patch_measurements", "patch_sensitizer_infos"
