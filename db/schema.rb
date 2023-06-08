@@ -16,20 +16,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182226) do
 
   create_table "immunotherapies", force: :cascade do |t|
     t.bigint "patient_id", null: false
-    t.string "origin"
-    t.string "ige_total"
-    t.string "ige_specific"
-    t.string "eosinofilos_perc"
-    t.string "eosinofilos_mm"
-    t.string "prick_summary"
-    t.string "patch_summary"
-    t.text "primary_diagnosis"
-    t.text "secundary_diagnosis"
-    t.text "immunotheray_composition"
-    t.text "dilution_volume"
-    t.integer "sublingual_drops"
-    t.string "city"
-    t.date "signature_date"
+    t.string "ige_total", default: ""
+    t.string "ige_specific", default: ""
+    t.string "eosinofilos_perc", default: ""
+    t.string "eosinofilos_mm", default: ""
+    t.string "prick_summary", default: ""
+    t.string "patch_summary", default: ""
+    t.text "primary_diagnosis", default: ""
+    t.text "secondary_diagnosis", default: ""
+    t.text "immunotheray_composition", default: ""
+    t.text "dilution_volume", default: ""
+    t.integer "sublingual_drops", default: 0
+    t.string "city", default: ""
+    t.date "signature_date", default: "1000-01-01"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_immunotherapies_on_patient_id"
