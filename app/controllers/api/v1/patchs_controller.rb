@@ -1,7 +1,8 @@
-class Api::V1::PatchController < ApplicationController
+class Api::V1::PatchsController < ApplicationController
+  before_action :set_patch_form, only: %i[show update destroy]
   skip_before_action :verify_authenticity_token
 
-  # POST /patients
+  # POST /patchs
   def create
     @patch_form = PatchForm.new(patch_form_params)
 
@@ -12,6 +13,25 @@ class Api::V1::PatchController < ApplicationController
         patch_measurement.save!
       end
     end
+    render json:
+             PatchForm
+               .select("patch_forms.*,patients.name,patients.birthday")
+               .joins(:patient)
+               .find(@patch_form.id),
+           status: 200
+  rescue ActiveRecord::RecordInvalid => exception
+    # do something with exception here
+    render json: {}, status: 500
+  end
+
+  # DELETE /patchs/1
+  def destroy
+    ActiveRecord::Base.transaction do
+      PatchMeasurement
+        .where(patch_form_id: @patch_form)
+        .each { |patch_measurement| patch_measurement.destroy }
+      @patch_form.destroy
+    end
     render json: @patch_form, status: 200
   rescue ActiveRecord::RecordInvalid => exception
     # do something with exception here
@@ -19,6 +39,11 @@ class Api::V1::PatchController < ApplicationController
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_patch_form
+    @patch_form = PatchForm.find(params[:id])
+  end
 
   # Only allow a list of trusted parameters through.
   def patch_form_params

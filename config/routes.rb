@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :patients
       resources :immunotherapies
-      resources :patch
+      resources :patchs
+      resources :allergens
     end
   end
 
