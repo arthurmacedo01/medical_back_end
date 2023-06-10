@@ -36,11 +36,17 @@ class Api::V1::PatientsController < ApplicationController
 
   # DELETE /patients/1
   def destroy
-    if @patient.destroy
-      render json: @patient, status: 200
-    else
-      render json: @patient, status: 500
+    ActiveRecord::Base.transaction do
+      patch_form_ids = PatchForm.where(patient_id: @patient.id).pluck(:id)
+      PatchMeasurement.where(patch_form_id: patch_form_ids).destroy_all
+      PatchForm.where(patient_id: @patient.id).destroy_all
+      Immunotherapy.where(patient_id: @patient.id).destroy_all
+      @patient.destroy
     end
+    render json: @patient, status: 200
+  rescue ActiveRecord::RecordInvalid => exception
+    # do something with exception here
+    render json: @patient, status: 500
   end
 
   private

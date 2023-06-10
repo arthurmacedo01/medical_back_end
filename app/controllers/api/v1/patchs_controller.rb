@@ -2,6 +2,17 @@ class Api::V1::PatchsController < ApplicationController
   before_action :set_patch_form, only: %i[show update destroy]
   skip_before_action :verify_authenticity_token
 
+  # GET /patchs/1
+  def show
+    render json:
+             PatchMeasurement
+               .select(
+                 "patch_measurements.*,patch_sensitizer_infos.label,patch_test_infos.identifier",
+               )
+               .joins(patch_sensitizer_info: :patch_test_info)
+               .where(patch_form_id: @patch_form.id)
+  end
+
   # POST /patchs
   def create
     @patch_form = PatchForm.new(patch_form_params)
@@ -27,9 +38,7 @@ class Api::V1::PatchsController < ApplicationController
   # DELETE /patchs/1
   def destroy
     ActiveRecord::Base.transaction do
-      PatchMeasurement
-        .where(patch_form_id: @patch_form)
-        .each { |patch_measurement| patch_measurement.destroy }
+      PatchMeasurement.where(patch_form_id: @patch_form).destroy_all
       @patch_form.destroy
     end
     render json: @patch_form, status: 200
