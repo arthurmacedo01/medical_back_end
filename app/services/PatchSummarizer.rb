@@ -38,11 +38,11 @@ class PatchSummarizer
             )
           end
         else
-          patch_array_result.push(
+          patch_label =
             patch_one_test_measurements[
               0
-            ].patch_sensitizer_info.label.match /\D+/ + "-"
-          )
+            ].patch_sensitizer_info.label.match /\D+/
+          patch_array_result.push(patch_label.to_s + "-")
         end
         puts patch_array_result
       end
