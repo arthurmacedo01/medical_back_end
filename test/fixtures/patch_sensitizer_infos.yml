@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patch_test_info: one
+  label: MyString
+  name: MyString
+  option_name: MyString
+  description: MyText
+  first_text: MyText
+  second_text: MyText
+
+two:
+  patch_test_info: two
+  label: MyString
+  name: MyString
+  option_name: MyString
+  description: MyText
+  first_text: MyText
+  second_text: MyText

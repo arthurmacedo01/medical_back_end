@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  origin: MyString
+  ige_total: MyString
+  ige_specific: MyString
+  eosinofilos_perc: MyString
+  eosinofilos_mm: MyString
+  prick_summary: MyString
+  patch_summary: MyString
+  primary_diagnosis: MyText
+  secundary_diagnosis: MyText
+  immunotheray_composition: MyText
+  dilution_volume: MyText
+  sublingual_drops: 1
+  city: MyString
+  signature_date: 2023-06-07
+
+two:
+  patient: two
+  origin: MyString
+  ige_total: MyString
+  ige_specific: MyString
+  eosinofilos_perc: MyString
+  eosinofilos_mm: MyString
+  prick_summary: MyString
+  patch_summary: MyString
+  primary_diagnosis: MyText
+  secundary_diagnosis: MyText
+  immunotheray_composition: MyText
+  dilution_volume: MyText
+  sublingual_drops: 1
+  city: MyString
+  signature_date: 2023-06-07
