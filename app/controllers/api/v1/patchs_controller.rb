@@ -2,6 +2,17 @@ class Api::V1::PatchsController < ApplicationController
   before_action :set_patch_form, only: %i[show update destroy]
   skip_before_action :verify_authenticity_token
 
+  # GET /patchs/1
+  def show
+    render json:
+             PatchMeasurement
+               .select(
+                 "patch_measurements.*,patch_sensitizer_infos.label,patch_test_infos.identifier",
+               )
+               .joins(patch_sensitizer_info: :patch_test_info)
+               .where(patch_form_id: @patch_form.id)
+  end
+
   # POST /patchs
   def create
     @patch_form = PatchForm.new(patch_form_params)
@@ -24,12 +35,25 @@ class Api::V1::PatchsController < ApplicationController
     render json: {}, status: 500
   end
 
+  # PATCH/PUT /patchs/1
+  def update
+    ActiveRecord::Base.transaction do
+      @patch_form.update(patch_form_params)
+      PatchMeasurement.where(patch_form_id: @patch_form).destroy_all
+      patch_measurements_params(@patch_form).each do |patch_measurements_param|
+        patch_measurement = PatchMeasurement.new(patch_measurements_param)
+        patch_measurement.save!
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => exception
+    # do something with exception here
+    render json: {}, status: 500
+  end
+
   # DELETE /patchs/1
   def destroy
     ActiveRecord::Base.transaction do
-      PatchMeasurement
-        .where(patch_form_id: @patch_form)
-        .each { |patch_measurement| patch_measurement.destroy }
+      PatchMeasurement.where(patch_form_id: @patch_form).destroy_all
       @patch_form.destroy
     end
     render json: @patch_form, status: 200
@@ -61,11 +85,9 @@ class Api::V1::PatchsController < ApplicationController
 
   def patch_measurements_params(patch_form)
     parameters_input =
-      params
-        .require(:patch_measurements)
-        .each do |a|
-          a.permit(:patient_id, :first, :second, :patch_sensitizer_info_label)
-        end
+      params[:patch_measurements].each do |a|
+        a.permit(:patient_id, :first, :second, :patch_sensitizer_info_label)
+      end
 
     parameters_input.map do |parameter_input|
       {
