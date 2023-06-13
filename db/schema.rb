@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_07_182226) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_13_131241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,9 +98,66 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_07_182226) do
     t.text "obs"
   end
 
+  create_table "prick_element_infos", force: :cascade do |t|
+    t.bigint "prick_test_info_id", null: false
+    t.bigint "prick_group_info_id", null: false
+    t.string "identifier"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prick_group_info_id"], name: "index_prick_element_infos_on_prick_group_info_id"
+    t.index ["prick_test_info_id"], name: "index_prick_element_infos_on_prick_test_info_id"
+  end
+
+  create_table "prick_forms", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.string "clinic"
+    t.string "city"
+    t.date "puncture_date"
+    t.date "signature_date"
+    t.text "comments"
+    t.decimal "positive_control"
+    t.decimal "negative_control"
+    t.decimal "mean_control"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_prick_forms_on_patient_id"
+  end
+
+  create_table "prick_group_infos", force: :cascade do |t|
+    t.string "group_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prick_measurements", force: :cascade do |t|
+    t.decimal "first"
+    t.decimal "second"
+    t.decimal "mean"
+    t.string "result"
+    t.boolean "psd"
+    t.bigint "prick_element_info_id", null: false
+    t.bigint "prick_form_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prick_element_info_id"], name: "index_prick_measurements_on_prick_element_info_id"
+    t.index ["prick_form_id"], name: "index_prick_measurements_on_prick_form_id"
+  end
+
+  create_table "prick_test_infos", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "immunotherapies", "patients"
   add_foreign_key "patch_forms", "patients"
   add_foreign_key "patch_measurements", "patch_forms"
   add_foreign_key "patch_measurements", "patch_sensitizer_infos"
   add_foreign_key "patch_sensitizer_infos", "patch_test_infos"
+  add_foreign_key "prick_element_infos", "prick_group_infos"
+  add_foreign_key "prick_element_infos", "prick_test_infos"
+  add_foreign_key "prick_forms", "patients"
+  add_foreign_key "prick_measurements", "prick_element_infos"
+  add_foreign_key "prick_measurements", "prick_forms"
 end

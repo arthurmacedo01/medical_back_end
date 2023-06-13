@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first: 9.99
+  second: 9.99
+  mean: 9.99
+  result: MyString
+  psd: false
+  prick_element_info: one
+  prick_form: one
+
+two:
+  first: 9.99
+  second: 9.99
+  mean: 9.99
+  result: MyString
+  psd: false
+  prick_element_info: two
+  prick_form: two
