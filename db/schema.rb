@@ -100,7 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_131241) do
 
   create_table "prick_element_infos", force: :cascade do |t|
     t.bigint "prick_test_info_id", null: false
-    t.bigint "prick_group_info_id", null: false
+    t.bigint "prick_group_info_id"
     t.string "identifier"
     t.string "label"
     t.datetime "created_at", null: false
