@@ -34,6 +34,27 @@ class Api::V1::PricksController < ApplicationController
     render json: {}, status: 500
   end
 
+  # PATCH/PUT /pricks/1
+  def update
+    ActiveRecord::Base.transaction do
+      @prick_form.update(prick_form_params)
+      PrickMeasurement.where(prick_form_id: @prick_form).destroy_all
+      prick_measurements_params(@prick_form).each do |prick_measurements_param|
+        prick_measurement = PrickMeasurement.new(prick_measurements_param)
+        prick_measurement.save!
+      end
+    end
+    render json:
+             PrickForm
+               .select("prick_forms.*,patients.name,patients.birthday")
+               .joins(:patient)
+               .find(@prick_form.id),
+           status: 200
+  rescue ActiveRecord::RecordInvalid => exception
+    # do something with exception here
+    render json: {}, status: 500
+  end
+
   # DELETE /pricks/1
   def destroy
     ActiveRecord::Base.transaction do
