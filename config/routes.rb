@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :immunotherapies
       resources :patchs
       resources :allergens
+      resources :pricks
     end
   end
 

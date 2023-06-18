@@ -44,3 +44,33 @@ csv.each do |row|
     second_text: row["second_text"],
   ).find_or_create_by(label: row["label"])
 end
+
+###  SEED FOR PrickTestInfo Model
+csv_text = File.read(Rails.root.join("lib", "seeds", "prick_test_info.csv"))
+csv = CSV.parse(csv_text, headers: true, encoding: "utf-8")
+csv.each { |row| PrickTestInfo.find_or_create_by(title: row["title"]) }
+
+###  SEED FOR PrickGroupInfo Model
+csv_text = File.read(Rails.root.join("lib", "seeds", "prick_group_info.csv"))
+csv = CSV.parse(csv_text, headers: true, encoding: "utf-8")
+csv.each do |row|
+  PrickGroupInfo.find_or_create_by(group_name: row["group_name"])
+end
+
+###  SEED FOR PrickElementInfo Model
+csv_text = File.read(Rails.root.join("lib", "seeds", "prick_element_info.csv"))
+csv = CSV.parse(csv_text, headers: true, encoding: "utf-8")
+csv.each do |row|
+  PrickElementInfo.create_with(
+    prick_group_info_id:
+      (
+        if PrickGroupInfo.find_by(group_name: row["group_name"]).present?
+          PrickGroupInfo.find_by(group_name: row["group_name"]).id
+        else
+          nil
+        end
+      ),
+    prick_test_info_id: PrickTestInfo.find_by(title: row["title"]).id,
+    label: row["label"],
+  ).find_or_create_by(identifier: row["identifier"])
+end

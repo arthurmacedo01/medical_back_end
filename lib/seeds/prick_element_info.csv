@@ -1,0 +1,20 @@
+identifier,label,group_name,title
+Dp,<i>Dermatophagoides pteronyssinus</i>,Ácaros,Aeroalérgenos
+Df,<i>Dermatophagoides farinae</i>,Ácaros,Aeroalérgenos
+Bt,<i>Blomia tropicalis</i>,Ácaros,Aeroalérgenos
+Fg,Fungos Mix III<sup>A</sup>,Fungos do Ar,Aeroalérgenos
+Po,Gramíneas Mix II<sup>C</sup>,Pólens de Gramíneas,Aeroalérgenos
+Ba,Baratas Mix<sup>B</sup>,Epitélios de Animais,Aeroalérgenos
+Ec,<i>Canis familiaris</i> (cão),Epitélios de Animais,Aeroalérgenos
+Eg,<i>Felis domesticus</i> (gato),Epitélios de Animais,Aeroalérgenos
+Lv,Leite de vaca,,Alimentos
+Ov,Ovo de galinha,,Alimentos
+Sj,Soja,,Alimentos
+Tg,Trigo,,Alimentos
+Am,Amendoim,,Alimentos
+Ct,Castanhas,,Alimentos
+Ca,Camarão,,Alimentos
+Pe,Peixes,,Alimentos
+Cp,<i>Culex pipiens</i>,Mosquito,Insetos
+Si,<i>Solenopsis invicta</i>,Formiga,Insetos
+Hb,<i>Hevea brasiliensis</i>,,Látex

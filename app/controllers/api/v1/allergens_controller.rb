@@ -15,6 +15,10 @@ class Api::V1::AllergensController < ApplicationController
         PatchForm.select("patch_forms.*,patients.name,patients.birthday").joins(
           :patient,
         ),
+      prick_forms:
+        PrickForm.select("prick_forms.*,patients.name,patients.birthday").joins(
+          :patient,
+        ),
     }
   end
 end
