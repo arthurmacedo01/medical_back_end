@@ -45,6 +45,12 @@ class Api::V1::PatchsController < ApplicationController
         patch_measurement.save!
       end
     end
+    render json:
+             PatchForm
+               .select("patch_forms.*,patients.name,patients.birthday")
+               .joins(:patient)
+               .find(@patch_form.id),
+           status: 200
   rescue ActiveRecord::RecordInvalid => exception
     # do something with exception here
     render json: {}, status: 500
