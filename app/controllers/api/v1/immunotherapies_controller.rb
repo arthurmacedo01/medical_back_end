@@ -19,6 +19,8 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
     @immunotherapy.patch_summary =
       PatchSummarizer.call(@immunotherapy.patient_id)
+    @immunotherapy.prick_summary =
+      PrickSummarizer.call(@immunotherapy.patient_id)
 
     if @immunotherapy.save
       render json:
