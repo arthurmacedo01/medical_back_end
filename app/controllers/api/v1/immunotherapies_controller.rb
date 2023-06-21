@@ -51,6 +51,13 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     end
   end
 
+  # GET /immunotherapies/summarize_prick/1
+  def summarize_prick
+    prick_summary = PrickSummarizer.call(immunotherapy_patient)
+
+    render json: { prick_summary: prick_summary }, status: 200
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -66,6 +73,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
       :ige_specific,
       :eosinofilos_perc,
       :eosinofilos_mm,
+      :others,
       :prick_summary,
       :patch_summary,
       :primary_diagnosis,
@@ -82,5 +90,9 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     Immunotherapy.select(
       "immunotherapies.*,patients.name,patients.birthday,patients.cpf,patients.gender,patients.contact,patients.responsable_name,patients.responsable_degree,patients.origin",
     ).joins(:patient)
+  end
+
+  def immunotherapy_patient
+    params.require(:patient_id)
   end
 end
