@@ -40,6 +40,9 @@ class Api::V1::PatientsController < ApplicationController
       patch_form_ids = PatchForm.where(patient_id: @patient.id).pluck(:id)
       PatchMeasurement.where(patch_form_id: patch_form_ids).destroy_all
       PatchForm.where(patient_id: @patient.id).destroy_all
+      prick_form_ids = PrickForm.where(patient_id: @patient.id).pluck(:id)    
+      PrickMeasurement.where(prick_form_id: prick_form_ids).destroy_all
+      PrickForm.where(patient_id: @patient.id).destroy_all
       Immunotherapy.where(patient_id: @patient.id).destroy_all
       @patient.destroy
     end
