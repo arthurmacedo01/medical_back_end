@@ -4,8 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.3"
 
 gem 'rack-cors'
-
 gem 'devise'
+gem 'devise-jwt'
+gem 'jsonapi-serializer'
 
 # # Transform HTML into PDFs, PNGs or JPEGs using Google Puppeteer and Chromium
 # gem 'groover'
