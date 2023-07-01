@@ -1,4 +1,6 @@
 class Api::V1::SummariesController < ApplicationController
+  before_action :authenticate_user!
+  
   # GET /summaries/1
   def show
     patch_summary = PatchSummarizer.call(immunotherapy_patient)

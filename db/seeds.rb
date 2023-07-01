@@ -8,6 +8,11 @@
 
 require "csv"
 
+User.create_with(
+  password: Rails.application.credentials.fetch(:admin_password),
+  password_confirmation: Rails.application.credentials.fetch(:admin_password),
+).find_or_create_by(email: Rails.application.credentials.fetch(:admin_email))
+
 Patient.find_or_create_by(
   name: "Fulano de Tal",
   birthday: "1989-01-20",

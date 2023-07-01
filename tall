@@ -1,0 +1,215 @@
+[33mcommit 0b7c067da3fe9df0ca5dc2713d56708f2c972beb[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Fri Jun 30 16:40:27 2023 -0300
+
+    jwt
+
+[33mcommit 4917d6f0c710da910cfccc70a722a9a528afcd20[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 28 10:02:01 2023 -0300
+
+    devise
+
+[33mcommit b8dce28598fab28a60a1b2b570dd5119c0bf926f[m[33m ([m[1;31morigin/staging[m[33m, [m[1;32mstaging[m[33m)[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Fri Jun 23 15:23:55 2023 -0300
+
+    summaries controller
+
+[33mcommit dc6d32fc845b07668ac6b93b0a878fc3faf8deb0[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 21 15:02:38 2023 -0300
+
+    delete patient with prick
+
+[33mcommit 162f4d583be2a5f9f1d7a48431a15d20ad94b531[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 21 14:28:28 2023 -0300
+
+    load summarize prick
+
+[33mcommit 91623f7f41d9856feac5c3826801c1412bc9aa50[m
+Merge: be2f211 ba6a4bc
+Author: Arthur Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 19 11:45:29 2023 -0300
+
+    Merge pull request #5 from arthurmacedo01/allergen_api
+    
+    prick summurizer service
+
+[33mcommit ba6a4bc82be4eaabe41970ae153373cb9f3d5bae[m[33m ([m[1;31morigin/allergen_api[m[33m, [m[1;32mallergen_api[m[33m)[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 19 11:38:04 2023 -0300
+
+    prick summurizer service
+
+[33mcommit be2f211be914b72baf84cf3a85e7a320b691b4fa[m
+Merge: 5e8f12f 999e055
+Author: Arthur Macedo <arthurmacedo01@gmail.com>
+Date:   Sun Jun 18 13:29:13 2023 -0300
+
+    Merge pull request #4 from arthurmacedo01/allergen_api
+    
+    Allergen api
+
+[33mcommit 999e05569df24e13644b1aac21eeda4e1a94356c[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Sun Jun 18 13:14:33 2023 -0300
+
+    prick update
+
+[33mcommit 29fb2caa8f04559c3b14819573f4d331b7ccec54[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Sat Jun 17 18:49:42 2023 -0300
+
+    prick controller
+
+[33mcommit 7f20257342eac7e5dff748862127844a4daf2d67[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 14 19:55:28 2023 -0300
+
+    seed for prick models
+
+[33mcommit 3a2724ca8eb99c070b8678583769b6dacece42d9[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue Jun 13 10:14:16 2023 -0300
+
+    create prick models
+
+[33mcommit 750acf1e96634b6c28b51a23a33048118c44c45e[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue Jun 13 09:21:30 2023 -0300
+
+    fix patch update
+
+[33mcommit 5e8f12f6c0ff14c19030f8f805da8a6f91f2e6a2[m
+Merge: 6108084 ae86e05
+Author: Arthur Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 12 09:15:06 2023 -0300
+
+    Merge pull request #2 from arthurmacedo01/allergen_api
+    
+    Allergen api
+
+[33mcommit ae86e05ae304b56adcba9c4b1aadb514aa5bbca5[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 12 09:12:28 2023 -0300
+
+    patch update
+
+[33mcommit ef15bbf53c15e3f82699f79fe6fd9e6835abc5ae[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Sat Jun 10 10:45:40 2023 -0300
+
+    show patch and delete patient
+
+[33mcommit 610808405dec21728793f76ad5c49673fb395d04[m
+Merge: d45687b 6d260df
+Author: Arthur Macedo <arthurmacedo01@gmail.com>
+Date:   Fri Jun 9 16:03:14 2023 -0300
+
+    Merge pull request #1 from arthurmacedo01/allergen_api
+    
+    Allergen partial api
+
+[33mcommit 6d260df253f6f3959af446e3d88789533c4eaa17[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Fri Jun 9 16:00:45 2023 -0300
+
+    allengens index to patch
+
+[33mcommit daad9426c000aa2f6ae0aaa1a402c8a4676df4f0[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Fri Jun 9 12:33:14 2023 -0300
+
+    uniqueness cpf
+
+[33mcommit d45687b5a166705acf7a8739434ed205dd730114[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Thu Jun 8 18:13:06 2023 -0300
+
+    immuno api
+
+[33mcommit cb0952d70340b61900d99126fec39be50d07191e[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 7 15:55:21 2023 -0300
+
+    immunotherapy controller
+
+[33mcommit 3b88bae0ec0ba995b2b56bbf9005fa626e252e97[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 7 15:27:13 2023 -0300
+
+    immunotherapy model
+
+[33mcommit 4f10db23bc1969b2bf50e1a7834d58a2f582e296[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed Jun 7 15:03:37 2023 -0300
+
+    sumarizer service
+
+[33mcommit 4b75777f0dc938b53207d0f7be7531050e379262[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 5 22:28:54 2023 -0300
+
+    patch controller create
+
+[33mcommit 54aea271933379313efe8e484ce07a066e50c3dc[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Mon Jun 5 19:39:25 2023 -0300
+
+    patch models
+
+[33mcommit 258b4e147b90110b46904923e90aaa569e27fe1f[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Thu Jun 1 20:13:17 2023 -0300
+
+    add obs to patient
+
+[33mcommit 3ca6e02631d0f607d9701c49a7a72273051e06fb[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Thu Jun 1 16:18:20 2023 -0300
+
+    add origin to patient
+
+[33mcommit f334f27fad4141df13be7f87358997f6ec3886c2[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Wed May 31 16:37:11 2023 -0300
+
+    patient destroy and update
+
+[33mcommit b3aa47e8aa1d023738a38d5fa0daaacaafd7f5c0[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 21:13:51 2023 -0300
+
+    api create patient
+
+[33mcommit 7ab8ea051f9557ed16c2471866d0187df4479cb3[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 13:34:32 2023 -0300
+
+    database url only
+
+[33mcommit b4e4578a8153af85ca6e5e05956c384cd80faefd[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 13:28:36 2023 -0300
+
+    database url
+
+[33mcommit 1d6e33fbd20712cde9c4abac0151763e97d3c1c0[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 11:39:51 2023 -0300
+
+    patient model
+
+[33mcommit 95d113855828a1c86f0b38bf6438aaf6abc462ae[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 10:40:13 2023 -0300
+
+    adjust
+
+[33mcommit 987db4f6373044addc473b1c35f87d5159fdd7e1[m
+Author: Arthur_Macedo <arthurmacedo01@gmail.com>
+Date:   Tue May 30 10:10:23 2023 -0300
+
+    first commit

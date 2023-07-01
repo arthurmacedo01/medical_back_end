@@ -1,6 +1,6 @@
 class Api::V1::PatientsController < ApplicationController
   before_action :set_patient, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
 
   # GET /patients
   def index
