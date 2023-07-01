@@ -1,7 +1,7 @@
 class Api::V1::PatchsController < ApplicationController
   before_action :set_patch_form, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
+  
   # GET /patchs/1
   def show
     render json:

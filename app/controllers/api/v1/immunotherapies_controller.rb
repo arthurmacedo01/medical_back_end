@@ -1,7 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
+  
   # GET /immunotherapies
   def index
     @immunotherapies = immunotherapies_with_patients.to_json
