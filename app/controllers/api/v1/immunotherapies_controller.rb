@@ -1,7 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
+  
   # GET /immunotherapies
   def index
     @immunotherapies = immunotherapies_with_patients.to_json
@@ -51,13 +51,6 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     end
   end
 
-  # GET /immunotherapies/summarize_prick/1
-  def summarize_prick
-    prick_summary = PrickSummarizer.call(immunotherapy_patient)
-
-    render json: { prick_summary: prick_summary }, status: 200
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -92,7 +85,4 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     ).joins(:patient)
   end
 
-  def immunotherapy_patient
-    params.require(:patient_id)
-  end
 end

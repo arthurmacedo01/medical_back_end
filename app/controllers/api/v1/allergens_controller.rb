@@ -1,6 +1,6 @@
 class Api::V1::AllergensController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
+  
   # GET /allergens
   def index
     @allergens = allergens_with_patients.to_json

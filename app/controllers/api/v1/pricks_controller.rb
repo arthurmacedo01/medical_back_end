@@ -1,7 +1,7 @@
 class Api::V1::PricksController < ApplicationController
   before_action :set_prick_form, only: %i[show update destroy]
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
+  
   # GET /pricks/1
   def show
     render json:
