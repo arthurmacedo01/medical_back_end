@@ -1,7 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
-  before_action :authenticate_user!
-  
+  # before_action :authenticate_user!
+
   # GET /immunotherapies
   def index
     @immunotherapies = immunotherapies_with_patients.to_json
@@ -10,7 +10,32 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # GET /immunotherapies/1
   def show
-    render json: @immunotherapy
+    html =
+      render_to_string(
+        template: "api/v1/immunotherapies/show",
+        layout: "api/v1/layouts/application",
+        formats: [:html],
+        locals: {
+          immunotherapy: @immunotherapy,
+        },
+        encoding: "UTF-8", # Encoding
+      )
+    pdf_data = Grover.new(html).to_pdf
+
+    # Save the PDF data to a temporary file
+    temp_pdf_path = Rails.root.join("tmp", "temp_pdf.pdf")
+    File.open(temp_pdf_path, "wb") { |file| file << pdf_data }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @immunotherapy }
+      format.pdf do
+        send_file temp_pdf_path,
+                  filename: "your_filename.pdf",
+                  type: "application/pdf",
+                  disposition: "attachment"
+      end
+    end
   end
 
   # POST /immunotherapies
@@ -84,5 +109,4 @@ class Api::V1::ImmunotherapiesController < ApplicationController
       "immunotherapies.*,patients.name,patients.birthday,patients.cpf,patients.gender,patients.contact,patients.responsable_name,patients.responsable_degree,patients.origin",
     ).joins(:patient)
   end
-
 end
