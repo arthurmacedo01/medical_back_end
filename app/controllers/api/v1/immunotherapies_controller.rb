@@ -1,6 +1,8 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
   # before_action :authenticate_user!
+  helper ImmunotherapiesHelper
+
 
   # GET /immunotherapies
   def index
@@ -24,7 +26,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     url = ENV["RAILS_SERVE_STATIC_FILES"]
     base_url = url.match(%r{^https?://[^/]+}).to_s
     absolute_html = Grover::HTMLPreprocessor.process html, base_url+"/", "http"
-    grover = Grover.new(absolute_html)
+    grover = Grover.new(absolute_html, format: 'A5')
     pdf_data = grover.to_pdf
 
     # # Save the PDF data to a temporary file

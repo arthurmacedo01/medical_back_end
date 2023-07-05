@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'rubocop', require: false
 
 gem 'dotenv-rails', groups: [:development, :test]
 
