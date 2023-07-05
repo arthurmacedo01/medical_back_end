@@ -4,7 +4,7 @@ class Api::V1::PatientsController < ApplicationController
 
   # GET /patients
   def index
-    @patients = Patient.all
+    @patients = Patient.all.reverse
 
     render json: @patients
   end
