@@ -14,11 +14,11 @@ class Api::V1::AllergensController < ApplicationController
       patch_forms:
         PatchForm.select("patch_forms.*,patients.name,patients.birthday").joins(
           :patient,
-        ),
+        ).reverse,
       prick_forms:
         PrickForm.select("prick_forms.*,patients.name,patients.birthday").joins(
           :patient,
-        ),
+        ).reverse,
     }
   end
 end
