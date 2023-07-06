@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rubocop', require: false
 
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'dotenv-rails', groups: [:development, :test]
 

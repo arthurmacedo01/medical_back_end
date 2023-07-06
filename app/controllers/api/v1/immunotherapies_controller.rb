@@ -23,6 +23,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
                   filename: "your_filename.pdf",
                   type: "application/pdf",
                   disposition: "attachment"
+        FileDestroyer.delay(run_at: 30.seconds.from_now).call(@temp_pdf_path)
       end
     end
   end
@@ -132,4 +133,5 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
     # run_at: 10.minutes.from_now,
   end
+  # handle_asynchronously :print_ola, run_at: Proc.new { 10.seconds.from_now }
 end
