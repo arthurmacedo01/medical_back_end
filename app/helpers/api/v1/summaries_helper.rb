@@ -1,2 +1,2 @@
-module SummariesHelper
+module Api::V1::SummariesHelper
 end

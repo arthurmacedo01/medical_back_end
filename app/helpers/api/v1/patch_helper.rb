@@ -1,2 +1,2 @@
-module PatchHelper
+module Api::V1::PatchHelper
 end
