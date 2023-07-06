@@ -14,7 +14,7 @@ class PrickSummarizer
         )
 
       prick_measurements.each do |e|
-        if (e.mean > 0)
+        if (e.mean >= 3)
           prick_array_result.push(
             e.prick_element_info.identifier + " " +
               (e.mean == e.mean.to_i ? e.mean.to_i.to_s : e.mean.to_s),

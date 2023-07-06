@@ -4,7 +4,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
   
   # GET /immunotherapies
   def index
-    @immunotherapies = immunotherapies_with_patients.to_json
+    @immunotherapies = immunotherapies_with_patients.reverse
     render json: @immunotherapies
   end
 
