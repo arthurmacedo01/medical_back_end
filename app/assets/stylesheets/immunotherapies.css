@@ -61,3 +61,18 @@
 .nowrap {
   white-space: nowrap;
 }
+.page_bottom {
+  position: absolute;
+  bottom: 0.6cm;
+  left: 0;
+  right: 0;
+  /* background-color: red; */
+}
+.footNote {
+  /* background-color: green; */
+  font-size: 6.5px;
+  color: red;
+  margin-top: -6px;
+  font-weight: bold;
+  text-align: start;
+}

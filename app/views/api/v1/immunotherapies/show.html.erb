@@ -1,4 +1,7 @@
 <%= stylesheet_link_tag "immunotherapies"%>
+
+<%= render partial: "api/v1/shared/header" %>
+
 <div class="page_title">
   RECEITUÁRIO DE IMUNOTERAPIA ALÉRGENO-ESPECÍFICA SUBLINGUAL
 </div>
@@ -125,5 +128,10 @@
       recomendado em cada situação.
     </div>
   </div>
+  <div class="page_bottom">
+    <%= render partial: "api/v1/shared/city_date_and_stamp", locals: {city: @immunotherapy.city, date: @immunotherapy.signature_date} %>
+    <div class="footNote">
+      ESTA RECEITA É VÁLIDA POR 06 MESES A PARTIR DA DATA DE EMISSÃO.
+    </div>
+  </div>
 </div>
-<%= render partial: "api/v1/shared/signature_and_stamp", locals: {city: @immunotherapy.city, date: @immunotherapy.signature_date} %>
