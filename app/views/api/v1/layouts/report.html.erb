@@ -1,0 +1,17 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= @page_title or "Page Title" %></title>
+  <%= stylesheet_link_tag "report" %>
+  <style><%= yield :stylesheets %></style>
+</head>
+<body>
+  <body id="content">
+    <%= content_for?(:content) ? yield(:content) : yield %>
+  </body>
+</body>
+</html>
+
+
+
+

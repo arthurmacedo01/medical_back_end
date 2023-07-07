@@ -104,7 +104,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     html =
       render_to_string(
         template: "api/v1/immunotherapies/show",
-        layout: "api/v1/layouts/application",
+        layout: "api/v1/layouts/one_a5_page",
         formats: [:html],
         locals: {
           immunotherapy: @immunotherapy,
@@ -116,7 +116,11 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     base_url = url.match(%r{^https?://[^/]+}).to_s
     absolute_html =
       Grover::HTMLPreprocessor.process html, base_url + "/", "http"
-    grover = Grover.new(absolute_html, format: "A5")
+
+    grover = Grover.new(absolute_html)
+    Grover.configure do |config|
+      config.options = { format: "A5", print_background: true }
+    end
     pdf_data = grover.to_pdf
 
     # Save the PDF data to a temporary file with a timestamp
@@ -126,12 +130,4 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     # Return the temporary file path
     temp_pdf_path
   end
-
-  def delete_temp_pdf
-    # Enqueue a job to delete the file after a delay of 1 hour (adjust as needed)
-    File.delete(@temp_pdf_path) if @temp_pdf_path && File.exist?(@temp_pdf_path)
-
-    # run_at: 10.minutes.from_now,
-  end
-  # handle_asynchronously :print_ola, run_at: Proc.new { 10.seconds.from_now }
 end

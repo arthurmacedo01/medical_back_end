@@ -1,9 +1,12 @@
+
 .page_title {
   margin-top: 20px;
   font-weight: bold;
   font-size: 10px;
+  text-align: center;
 }
 .container {
+  padding: 0.5cm;
   margin-top: 5px;
   font-size: 9.5px;
   text-align: justify;
@@ -42,7 +45,7 @@
 }
 .mode_img {
   height: 35px;
-  margin-bottom: 5px;
+  margin: 5px 0;
 }
 .magin_left {
   margin-left: 0.2cm;
@@ -64,8 +67,8 @@
 .page_bottom {
   position: absolute;
   bottom: 0.6cm;
-  left: 0;
-  right: 0;
+  left: 0.5cm;
+  right: 0.5cm;
   /* background-color: red; */
 }
 .footNote {
