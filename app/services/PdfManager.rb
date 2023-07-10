@@ -11,13 +11,12 @@ class PdfManager
     return temp_pdf_path
   end
   def delete_file(file_path)
-    puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     puts file_path && File.exist?(file_path)
     File.delete(file_path) if file_path && File.exist?(file_path)
   end
 
   def html2pdf(html)
-    url = ENV["RAILS_SERVE_STATIC_FILES"]
+    url = ENV["APP_API_URL"]
     base_url = url.match(%r{^https?://[^/]+}).to_s
     absolute_html =
       Grover::HTMLPreprocessor.process html, base_url + "/", "http"
