@@ -1,6 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
   # before_action :authenticate_user!
+  require "aws-sdk-core"
 
   # # Delete the temporary file after the action has completed
   # after_action :delete_temp_pdf, only: [:show]
@@ -13,14 +14,18 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # GET /immunotherapies/1
   def show
+    pdf_data = html2pdf
+    bucketManeger = BucketManeger.new
+    bucketManeger.write(pdf_data, "immunotherapies/#{@immunotherapy.id}.pdf")
+
     @temp_pdf_path = nil
     respond_to do |format|
       format.html
       format.json { render json: @immunotherapy }
       format.pdf do
-        @temp_pdf_path = save_as_pdf
+        @temp_pdf_path = save_as_pdf(pdf_data)
         send_file @temp_pdf_path,
-                  filename: "your_filename.pdf",
+                  filename: "imunoterapia.pdf",
                   type: "application/pdf",
                   disposition: "attachment"
         FileDestroyer.delay(run_at: 30.seconds.from_now).call(@temp_pdf_path)
@@ -100,7 +105,16 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     ).joins(:patient)
   end
 
-  def save_as_pdf
+  def save_as_pdf(pdf_data)
+    # Save the PDF data to a temporary file with a timestamp
+    timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
+    temp_pdf_path = Rails.root.join("tmp", "temp_#{timestamp}.pdf")
+    File.open(temp_pdf_path, "wb") { |file| file << pdf_data }
+    # Return the temporary file path
+    temp_pdf_path
+  end
+
+  def html2pdf
     html =
       render_to_string(
         template: "api/v1/immunotherapies/show",
@@ -122,12 +136,5 @@ class Api::V1::ImmunotherapiesController < ApplicationController
       config.options = { format: "A5", print_background: true }
     end
     pdf_data = grover.to_pdf
-
-    # Save the PDF data to a temporary file with a timestamp
-    timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
-    temp_pdf_path = Rails.root.join("tmp", "temp_#{timestamp}.pdf")
-    File.open(temp_pdf_path, "wb") { |file| file << pdf_data }
-    # Return the temporary file path
-    temp_pdf_path
   end
 end

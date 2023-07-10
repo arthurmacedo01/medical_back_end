@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rubocop', require: false
 
+gem 'aws-sdk-s3'
+gem 'aws-sdk-ec2', '~> 1'
+
 gem 'delayed_job_active_record'
 gem 'daemons'
 
