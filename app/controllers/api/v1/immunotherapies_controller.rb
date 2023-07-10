@@ -1,6 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
-  # before_action :authenticate_user!
+  before_action :set_pdf_manage, only: %i[create show update]
+  before_action :authenticate_user!
   require "aws-sdk-core"
 
   # # Delete the temporary file after the action has completed
@@ -14,16 +15,12 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # GET /immunotherapies/1
   def show
-    pdf_data = html2pdf
-    bucketManager = BucketManager.new
-    bucketManager.write(pdf_data, "immunotherapies/#{@immunotherapy.id}.pdf")
-
     @temp_pdf_path = nil
     respond_to do |format|
       format.html
       format.json { render json: @immunotherapy }
       format.pdf do
-        @temp_pdf_path = @pdfManager.write(pdf_data)
+        @temp_pdf_path = @pdfManager.write(html2pdf)
         send_file @temp_pdf_path,
                   filename: "imunoterapia.pdf",
                   type: "application/pdf",
@@ -55,6 +52,9 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # PATCH/PUT /immunotherapies/1
   def update
+    bucketManager = BucketManager.new
+    bucketManager.write(html2pdf, "immunotherapies/#{@immunotherapy.id}.pdf")
+
     if @immunotherapy.update(immunotherapy_params)
       render json:
                immunotherapies_with_patients.find(@immunotherapy.id).to_json,
@@ -77,8 +77,11 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_immunotherapy
-    @pdfManager = PdfManager.new
     @immunotherapy = Immunotherapy.find(params[:id])
+  end
+
+  def set_pdf_manage
+    @pdfManager = PdfManager.new
   end
 
   # Only allow a list of trusted parameters through.

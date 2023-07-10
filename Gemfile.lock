@@ -141,6 +141,7 @@ GEM
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
     erubi (1.12.0)
+    foreman (0.87.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     grover (1.1.5)
@@ -323,6 +324,7 @@ DEPENDENCIES
   devise
   devise-jwt
   dotenv-rails
+  foreman
   grover
   importmap-rails
   jbuilder

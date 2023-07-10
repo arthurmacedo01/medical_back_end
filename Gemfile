@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rubocop', require: false
 
+gem 'foreman'
+
 gem 'aws-sdk-s3'
 gem 'aws-sdk-ec2', '~> 1'
 
