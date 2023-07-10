@@ -1,0 +1,7 @@
+<%= stylesheet_link_tag "city_date_and_stamp"%>
+<div class="footer_row">
+  <p class="footer_city">
+    <%=city%>, <%=date_to_string(date)%>.
+  </p>
+  <%= render partial: "api/v1/shared/stamp" %>
+</div>

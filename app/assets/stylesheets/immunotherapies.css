@@ -1,0 +1,81 @@
+
+.page_title {
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+}
+.container {
+  padding: 0.5cm;
+  margin-top: 5px;
+  font-size: 9.5px;
+  text-align: justify;
+  text-justify: distribute;
+  line-height: 11.5px;
+}
+.box {
+  border: 1px solid rgb(198, 196, 196);
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin-bottom: 3px;
+}
+.field_title {
+  font-weight: bold;
+  font-size: 8.6px;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.item {
+  flex: 1;
+  margin: 0 3px;
+  /* background-color: red; */
+}
+.proc {
+  flex: 1;
+}
+.last_field {
+  width: 100px;
+}
+.img_container {
+  text-align: center;
+  display: block;
+  width: 50px;
+}
+.mode_img {
+  height: 35px;
+  margin: 5px 0;
+}
+.magin_left {
+  margin-left: 0.2cm;
+}
+.img_vacina {
+  display: block;
+  height: 99px;
+  margin: 5px auto;
+}
+
+.legend {
+  font-size: 7.5px;
+  line-height: 9px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+.page_bottom {
+  position: absolute;
+  bottom: 0.6cm;
+  left: 0.5cm;
+  right: 0.5cm;
+  /* background-color: red; */
+}
+.footNote {
+  /* background-color: green; */
+  font-size: 6.5px;
+  color: red;
+  margin-top: -6px;
+  font-weight: bold;
+  text-align: start;
+}

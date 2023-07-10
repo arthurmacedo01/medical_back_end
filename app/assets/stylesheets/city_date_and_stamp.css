@@ -1,0 +1,22 @@
+/*
+ *
+ */
+
+.footer_row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  padding: 0 15px;
+  /* background-color: rgb(255, 178, 127); */
+  align-items: center;
+}
+
+.footer_city {
+  margin: 0 10px;
+  color: black;
+  font-size: 12px;
+  line-height: 18px;
+  flex: 1;  
+  text-align: left;  
+  /* background-color: rgba(128, 128, 128, 0.149); */
+}
