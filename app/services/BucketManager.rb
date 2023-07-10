@@ -1,4 +1,4 @@
-class BucketManeger
+class BucketManager
   @@s3 = Aws::S3::Client.new
   @@bucket = ENV["BUCKET"]
 

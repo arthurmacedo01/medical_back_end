@@ -15,20 +15,22 @@ class Api::V1::ImmunotherapiesController < ApplicationController
   # GET /immunotherapies/1
   def show
     pdf_data = html2pdf
-    bucketManeger = BucketManeger.new
-    bucketManeger.write(pdf_data, "immunotherapies/#{@immunotherapy.id}.pdf")
+    bucketManager = BucketManager.new
+    bucketManager.write(pdf_data, "immunotherapies/#{@immunotherapy.id}.pdf")
 
     @temp_pdf_path = nil
     respond_to do |format|
       format.html
       format.json { render json: @immunotherapy }
       format.pdf do
-        @temp_pdf_path = save_as_pdf(pdf_data)
+        @temp_pdf_path = @pdfManager.write(pdf_data)
         send_file @temp_pdf_path,
                   filename: "imunoterapia.pdf",
                   type: "application/pdf",
                   disposition: "attachment"
-        FileDestroyer.delay(run_at: 30.seconds.from_now).call(@temp_pdf_path)
+        @pdfManager.delay(run_at: 5.seconds.from_now).delete_file(
+          @temp_pdf_path,
+        )
       end
     end
   end
@@ -75,6 +77,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_immunotherapy
+    @pdfManager = PdfManager.new
     @immunotherapy = Immunotherapy.find(params[:id])
   end
 
@@ -105,15 +108,6 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     ).joins(:patient)
   end
 
-  def save_as_pdf(pdf_data)
-    # Save the PDF data to a temporary file with a timestamp
-    timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
-    temp_pdf_path = Rails.root.join("tmp", "temp_#{timestamp}.pdf")
-    File.open(temp_pdf_path, "wb") { |file| file << pdf_data }
-    # Return the temporary file path
-    temp_pdf_path
-  end
-
   def html2pdf
     html =
       render_to_string(
@@ -125,16 +119,6 @@ class Api::V1::ImmunotherapiesController < ApplicationController
         },
         encoding: "UTF-8", # Encoding
       )
-
-    url = ENV["RAILS_SERVE_STATIC_FILES"]
-    base_url = url.match(%r{^https?://[^/]+}).to_s
-    absolute_html =
-      Grover::HTMLPreprocessor.process html, base_url + "/", "http"
-
-    grover = Grover.new(absolute_html)
-    Grover.configure do |config|
-      config.options = { format: "A5", print_background: true }
-    end
-    pdf_data = grover.to_pdf
+    @pdfManager.html2pdf(html)
   end
 end
