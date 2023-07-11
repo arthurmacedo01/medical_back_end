@@ -13,13 +13,15 @@ User.create_with(
   password_confirmation: Rails.application.credentials.fetch(:admin_password),
 ).find_or_create_by(email: Rails.application.credentials.fetch(:admin_email))
 
-Patient.find_or_create_by(
-  name: "Fulano de Tal",
-  birthday: "1989-01-20",
-  cpf: "042.234.567-89",
-  gender: "Masculinio",
-  contact: "(12) 99234-0934",
-)
+# Patient.find_or_create_by(
+#   name: "Fulano de Tal",
+#   birthday: "1989-01-20",
+#   responsable_name: "",
+#   responsable_degree: "",
+#   cpf: "042.234.567-89",
+#   gender: "Masculinio",
+#   contact: "(12) 99234-0934",
+# )
 
 ###  SEED FOR PatchTestInfo Model
 csv_text = File.read(Rails.root.join("lib", "seeds", "patch_test_info.csv"))
