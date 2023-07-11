@@ -24,8 +24,7 @@ class PdfManager
   def html2pdf(html)
     url = ENV["REACT_APP_API_URL"]
     base_url = url.match(%r{^https?://[^/]+}).to_s
-    absolute_html =
-      Grover::HTMLPreprocessor.process html, base_url + "/", "http"
+    absolute_html = Grover::HTMLPreprocessor.process html, base_url + "/", "http"
 
     grover = Grover.new(absolute_html)
     Grover.configure do |config|
