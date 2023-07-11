@@ -4,8 +4,14 @@ class PdfManager
 
   def write(pdf_data)
     # Save the PDF data to a temporary file with a timestamp
+    require "fileutils"
+
     timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
     temp_pdf_path = Rails.root.join("tmp", "pdf", "temp_#{timestamp}.pdf")
+
+    # Create the directory if it doesn't exist
+    FileUtils.mkdir_p(File.dirname(temp_pdf_path))
+    
     File.open(temp_pdf_path, "wb") { |file| file << pdf_data }
     # Return the temporary file path
     return temp_pdf_path
