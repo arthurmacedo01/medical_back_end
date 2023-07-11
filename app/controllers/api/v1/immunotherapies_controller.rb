@@ -1,7 +1,7 @@
 class Api::V1::ImmunotherapiesController < ApplicationController
   before_action :set_immunotherapy, only: %i[show update destroy]
   before_action :set_pdf_manage, only: %i[create show update]
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   require "aws-sdk-core"
 
   # # Delete the temporary file after the action has completed
