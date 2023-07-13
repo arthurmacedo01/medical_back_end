@@ -1,4 +1,3 @@
-
 .page_title {
   margin-top: 20px;
   font-weight: bold;
@@ -31,6 +30,13 @@
   flex: 1;
   margin: 0 3px;
   /* background-color: red; */
+}
+.cpf {
+  margin: 0 3px;
+}
+.contact {
+  margin: 0 3px;
+  min-width: 120px;
 }
 .proc {
   flex: 1;
