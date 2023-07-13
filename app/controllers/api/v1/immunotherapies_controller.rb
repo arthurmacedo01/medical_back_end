@@ -4,9 +4,6 @@ class Api::V1::ImmunotherapiesController < ApplicationController
   # before_action :authenticate_user!
   require "aws-sdk-core"
 
-  # # Delete the temporary file after the action has completed
-  # after_action :delete_temp_pdf, only: [:show]
-
   # GET /immunotherapies
   def index
     @immunotherapies = immunotherapies_with_patients.reverse
@@ -16,16 +13,23 @@ class Api::V1::ImmunotherapiesController < ApplicationController
   # GET /immunotherapies/1
   def show
     @temp_pdf_path = nil
+
     respond_to do |format|
       format.html
       format.json { render json: @immunotherapy }
       format.pdf do
-        @temp_pdf_path = @pdfManager.write(html2pdf)
+        timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
+        @temp_pdf_path = Rails.root.join("tmp", "pdf", "temp_#{timestamp}.pdf")
+        bucketManager = BucketManager.new
+        bucketManager.read(
+          "immunotherapies/#{@immunotherapy.id}.pdf",
+          @temp_pdf_path,
+        )
         send_file @temp_pdf_path,
                   filename: "imunoterapia.pdf",
                   type: "application/pdf",
                   disposition: "attachment"
-        @pdfManager.delay(run_at: 5.seconds.from_now).delete_file(
+        @pdfManager.delay(run_at: 35.seconds.from_now).delete_file(
           @temp_pdf_path,
         )
       end
@@ -52,10 +56,9 @@ class Api::V1::ImmunotherapiesController < ApplicationController
 
   # PATCH/PUT /immunotherapies/1
   def update
-    bucketManager = BucketManager.new
-    bucketManager.write(html2pdf, "immunotherapies/#{@immunotherapy.id}.pdf")
-
     if @immunotherapy.update(immunotherapy_params)
+      bucketManager = BucketManager.new
+      bucketManager.write(html2pdf, "immunotherapies/#{@immunotherapy.id}.pdf")
       render json:
                immunotherapies_with_patients.find(@immunotherapy.id).to_json,
              status: 200
@@ -67,6 +70,8 @@ class Api::V1::ImmunotherapiesController < ApplicationController
   # DELETE /immunotherapies/1
   def destroy
     if @immunotherapy.destroy
+      bucketManager = BucketManager.new
+      bucketManager.delete("immunotherapies/#{@immunotherapy.id}.pdf")
       render json: @immunotherapy, status: 200
     else
       render json: @immunotherapy, status: 500
