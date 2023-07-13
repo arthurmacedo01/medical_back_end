@@ -59,6 +59,7 @@ class Api::V1::ImmunotherapiesController < ApplicationController
     if @immunotherapy.update(immunotherapy_params)
       bucketManager = BucketManager.new
       bucketManager.write(html2pdf, "immunotherapies/#{@immunotherapy.id}.pdf")
+      @immunotherapy.update(pdf: true)
       render json:
                immunotherapies_with_patients.find(@immunotherapy.id).to_json,
              status: 200
