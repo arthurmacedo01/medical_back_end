@@ -20,6 +20,9 @@ class Api::V1::ImmunotherapiesController < ApplicationController
       format.pdf do
         timestamp = DateTime.now.strftime("%Y%m%d%H%M%S")
         @temp_pdf_path = Rails.root.join("tmp", "pdf", "temp_#{timestamp}.pdf")
+        # Create the directory if it doesn't exist
+        require "fileutils"
+        FileUtils.mkdir_p(File.dirname(temp_pdf_path))
         bucketManager = BucketManager.new
         bucketManager.read(
           "immunotherapies/#{@immunotherapy.id}.pdf",
